@@ -1,0 +1,24 @@
+TODO_LIST
+
+
+
+odtülü kızın kodu kullanılacak
+vec3f.h ı ekle
+
+
+
+1- parserı test et. çektiği bilgiler doğru mu bak
+2- örnek bir belgedeki üçgeni çizdir
+3- arka arkaya üçgen olduğunda ne olacak ona bak.
+    - z-buffer kullanacam (hashmap)
+4- ışık kaynağı ve gölge
+5-specular, ambiant, falan eklenecek
+6- 
+
+
+performans:
+
+multithread yapıya geçilecek
+kod gpuda çalıştırılacak
+
+note: her adımda öncesi ve sonrasının çalışma süresi ölçülecek
