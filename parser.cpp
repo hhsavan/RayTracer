@@ -4,8 +4,7 @@
 #include <stdexcept>
 #include <iostream>
 
-void parser::Scene::loadFromXml(const std::string &filepath)
-{
+void parser::Scene::loadFromXml(const std::string &filepath){
     tinyxml2::XMLDocument file;
     std::stringstream stream;
 
@@ -20,7 +19,6 @@ void parser::Scene::loadFromXml(const std::string &filepath)
     {
         throw std::runtime_error("Error: Root is not found.");
     }
-
     // Get BackgroundColor
     auto element = root->FirstChildElement("BackgroundColor");
     if (element)
@@ -85,7 +83,7 @@ void parser::Scene::loadFromXml(const std::string &filepath)
         stream >> camera.near_distance;
         stream >> camera.image_width >> camera.image_height;
         stream >> camera.image_name;
-
+        std::cout << camera.image_height;
         cameras.push_back(camera);
         element = element->NextSiblingElement("Camera");
     }
@@ -111,27 +109,31 @@ void parser::Scene::loadFromXml(const std::string &filepath)
         element = element->NextSiblingElement("PointLight");
     }
 
-    element = element->FirstChildElement("triangularlight");
-    TriangleLight triangulur_light;
-    while (element)
-    {
-        child = element->FirstChildElement("vertex1");
-        stream << child->GetText() << std::endl;
-        child = element->FirstChildElement("vertex2");
-        stream << child->GetText() << std::endl;
-        child = element->FirstChildElement("vertex3");
-        stream << child->GetText() << std::endl;
-        child = element->FirstChildElement("Intensity");
-        stream << child->GetText() << std::endl;
+    // TODO Triangular light eklenecek
+    // printf("burda\n");
 
-        stream >> triangulur_light.vertex1.x >> triangulur_light.vertex1.y >> triangulur_light.vertex1.z;
-        stream >> triangulur_light.vertex2.x >> triangulur_light.vertex2.y >> triangulur_light.vertex2.z;
-        stream >> triangulur_light.vertex3.x >> triangulur_light.vertex3.y >> triangulur_light.vertex3.z;
-        stream >> triangulur_light.intensity.x >> triangulur_light.intensity.y >> triangulur_light.intensity.z;
+    // element = element->FirstChildElement("triangularlight");
+    // TriangleLight triangulur_light;
+    // while (element)
+    // {
 
-        point_lights.push_back(point_light);
-        element = element->NextSiblingElement("triangularlight");
-    }
+    //     child = element->FirstChildElement("vertex1");
+    //     stream << child->GetText() << std::endl;
+    //     child = element->FirstChildElement("vertex2");
+    //     stream << child->GetText() << std::endl;
+    //     child = element->FirstChildElement("vertex3");
+    //     stream << child->GetText() << std::endl;
+    //     child = element->FirstChildElement("Intensity");
+    //     stream << child->GetText() << std::endl;
+
+    //     stream >> triangulur_light.vertex1.x >> triangulur_light.vertex1.y >> triangulur_light.vertex1.z;
+    //     stream >> triangulur_light.vertex2.x >> triangulur_light.vertex2.y >> triangulur_light.vertex2.z;
+    //     stream >> triangulur_light.vertex3.x >> triangulur_light.vertex3.y >> triangulur_light.vertex3.z;
+    //     stream >> triangulur_light.intensity.x >> triangulur_light.intensity.y >> triangulur_light.intensity.z;
+
+    //     point_lights.push_back(point_light);
+    //     element = element->NextSiblingElement("triangularlight");
+    // }
 
     // Get Materials
     element = root->FirstChildElement("Materials");
@@ -139,15 +141,16 @@ void parser::Scene::loadFromXml(const std::string &filepath)
     Material material;
     while (element)
     {
-        child = element->FirstChildElement("ambient");
+        child = element->FirstChildElement("Ambient");
+
         stream << child->GetText() << std::endl;
-        child = element->FirstChildElement("diffuse");
+        child = element->FirstChildElement("Diffuse");
         stream << child->GetText() << std::endl;
-        child = element->FirstChildElement("specular");
+        child = element->FirstChildElement("Specular");
         stream << child->GetText() << std::endl;
-        child = element->FirstChildElement("phongexponent");
+        child = element->FirstChildElement("PhongExponent");
         stream << child->GetText() << std::endl;
-        child = element->FirstChildElement("mirrorreflactance");
+        child = element->FirstChildElement("MirrorReflactance");
         stream << child->GetText() << std::endl;
 
         stream >> material.ambient.x >> material.ambient.y >> material.ambient.z;
@@ -159,7 +162,6 @@ void parser::Scene::loadFromXml(const std::string &filepath)
         materials.push_back(material);
         element = element->NextSiblingElement("Material");
     }
-
     // Get VertexData
     element = root->FirstChildElement("VertexData");
     stream << element->GetText() << std::endl;
@@ -170,7 +172,6 @@ void parser::Scene::loadFromXml(const std::string &filepath)
         vertex_data.push_back(vertex);
     }
     stream.clear();
-
     // Get Meshes
     element = root->FirstChildElement("Objects");
     element = element->FirstChildElement("Mesh");
@@ -236,4 +237,10 @@ void parser::Scene::loadFromXml(const std::string &filepath)
         spheres.push_back(sphere);
         element = element->NextSiblingElement("Sphere");
     }
+}
+
+
+template<typename T>
+void print(const T& x){
+
 }

@@ -16,9 +16,17 @@ vec3f.h ı ekle
 6- 
 
 
+//eksik kalanlar:
+triangular light
+
+
+
 performans:
 
 multithread yapıya geçilecek
 kod gpuda çalıştırılacak
+
+makefile a -03 eklenecek
+    :	g++ *.cpp -O3 -o raytracer -std=c++11
 
 note: her adımda öncesi ve sonrasının çalışma süresi ölçülecek

@@ -3,15 +3,16 @@
 
 #include <string>
 #include <vector>
-
+#include "vec3.h"
+using namespace Vector3f;
 namespace parser
 {
     //Notice that all the structures are as simple as possible
     //so that you are not enforced to adopt any style or design.
-    struct Vec3f
-    {
-        float x, y, z;
-    };
+    // struct Vec3f
+    // {
+    //     float x, y, z;
+    // };
 
     struct Vec3i
     {
@@ -81,7 +82,7 @@ namespace parser
         int center_vertex_id;
         float radius;
     };
-
+    
     struct Scene
     {
         //Data
